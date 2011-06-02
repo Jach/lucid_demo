@@ -1,0 +1,15 @@
+html, body, div.wrapper { height: 99%; }
+
+body {
+  font: georgia,times,verdana,arial,courier
+}
+
+img {
+  border: none;
+  max-width: 100%;
+}
+
+.error {
+  color: #ff0000;
+  font-weight: bold;
+}
