@@ -1,2 +1,2 @@
 *.swp
-app/config/dbinfo.php
+phpserver/app/config/dbinfo.php
