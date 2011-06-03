@@ -1,2 +1,3 @@
 *.swp
 phpserver/app/config/dbinfo.php
+phpserver/html/flex/SQLAdmin.swf

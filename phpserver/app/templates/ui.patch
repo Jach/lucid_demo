@@ -1,0 +1,58 @@
+--- SQLAdmin.ht2	2011-06-03 12:42:44.938664873 -0700
++++ SQLAdmin.tpl2	2011-06-03 12:24:15.816468526 -0700
+@@ -1,9 +1,14 @@
+-<!-- saved from url=(0014)about:internet -->
+-<html lang="en">
++<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
++"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
++<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head>
+-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+-<title>SQLAdmin</title>
+-<script src="AC_OETags.js" language="javascript"></script>
++  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
++  <title><?php echo $title; ?></title>
++  <link rel="shortcut icon" href="/imgs/favicon.ico" />
++  <link rel="stylesheet" href="/css/mainstyle.css" />
++  <script type="text/javascript" src="/js/mainjs.js"></script>
++
++  <script src="/flex/AC_OETags.js" language="javascript"></script>
+ <style>
+ body { margin: 0px; overflow:hidden }
+ </style>
+@@ -23,7 +28,7 @@
+ </head>
+ 
+ <body scroll="no">
+-<script language="JavaScript" type="text/javascript" src="history.js"></script>
++<script language="JavaScript" type="text/javascript" src="/flex/history.js"></script>
+ <script language="JavaScript" type="text/javascript">
+ <!--
+ // Version check for the Flash Player that has the ability to start Player Product Install (6.0r65)
+@@ -70,7 +75,7 @@
+ 			"quality", "high",
+ 			"bgcolor", "#869ca7",
+ 			"name", "SQLAdmin",
+-			"flashvars",'resultlimit=500&server=&database=&username=sa&password=&webservice=&historyUrl=history.htm%3F&lconid=' + lc_id + '',
++      "flashvars",'resultlimit=500&server=<?php echo $server; ?>&database=&username=sa&password=&webservice=&historyUrl=history.htm%3F&lconid=' + lc_id + '',
+ 			"allowScriptAccess","sameDomain",
+ 			"type", "application/x-shockwave-flash",
+ 			"pluginspage", "http://www.adobe.com/go/getflashplayer"
+@@ -87,7 +92,7 @@
+   	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+ 			id="SQLAdmin" width="100%" height="100%"
+ 			codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+-			<param name="flashvars" value="resultlimit=500&server=&database=&username=sa&password=&webservice=">
++      <param name="flashvars" value="resultlimit=500&server=<?php echo $server; ?>&database=&username=sa&password=&webservice=">
+ 			<param name="movie" value="SQLAdmin.swf" />
+ 			<param name="quality" value="high" />
+ 			<param name="bgcolor" value="#869ca7" />
+@@ -100,7 +105,7 @@
+ 				allowScriptAccess="sameDomain"
+ 				type="application/x-shockwave-flash"
+ 				pluginspage="http://www.adobe.com/go/getflashplayer"
+-				flashVars="resultlimit=5000&server=&database=&username=sa&password=&webservice=">
++        flashVars="resultlimit=5000&server=<?php echo $server; ?>&database=&username=sa&password=&webservice=">
+ 			</embed>
+ 	</object>
+ </noscript>
