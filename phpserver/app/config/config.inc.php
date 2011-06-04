@@ -62,6 +62,7 @@ if ($local) {
 
   // STORE DB connectivity info variables as above, here:
   require_once APP_URI . 'config/dbinfo.php';
+  // Also store the variable $authpass for simple service protection.
 
 }
 
