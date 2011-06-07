@@ -1,3 +1,13 @@
+$(function () {
+  window.setInterval(ping, 60000);
+});
+function ping() {
+  $.get(BASE_URL + 'ping', 
+    function(r) {
+      //pass
+    }, 'json');
+}
+
 /**
 *
 *  Base64 encode / decode

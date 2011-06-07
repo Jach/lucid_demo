@@ -1,0 +1,24 @@
+Files to add after cloning:
+
+phpserver/app/config/dbinfo.php:
+
+<?php
+// database connection info
+$host = 'host';
+$user = '';
+$pass = '';
+$database = '';
+// server registration pass
+$authpass = 'authpass';
+?>
+
+scripts/authpass.txt:
+
+authpass
+
+Recommended password generation service:
+https://www.fourmilab.ch/hotbits/secure_generate.html
+
+PHP dependencies: PHP 5.3
+
+Script dependencies: wget, unzip, patch, curl, root privs

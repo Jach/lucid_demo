@@ -11,7 +11,7 @@ class HomeService extends BaseAppService {
       , ':/noservers' => 'disp_no_servers'
       , 'get:/ping' => 'ping'
       , 'get:/adminui' => 'disp_adminui'
-      , 'post:/register_server/@authpass/@url/@port' => 'register_server'
+      , ':/register_server/@authpass/@url/@port' => 'register_server'
       );
 
     if(!$internal) parent::__construct();
@@ -22,22 +22,26 @@ class HomeService extends BaseAppService {
   }
 
   function disp_adminui($params) {
-    // Pick a server:
     global $dbc;
-    $q = 'SELECT id, url, port FROM servers WHERE NOT occupied LIMIT 1';
-    $r = mysqli_query($dbc, $q);
     $data = array();
-    if (mysqli_num_rows($r) == 1)
-      $data = mysqli_fetch_assoc($r);
-    else
-      redirect('/noservers');
-    $q = 'UPDATE servers SET occupied=TRUE, acquire_time=NOW(), session_id=\'' .
-      escape_data(session_id()) . '\' WHERE id=' . $data['id'];
-    $r = mysqli_query($dbc, $q);
-    if (mysqli_affected_rows($dbc) == 1)
-      $_SESSION['server_id'] = (int)$data['id'];
-    else
-      redirect('/noservers');
+    if (isset($_SESSION['server_id'])) {
+      // try to give them old server if they were the last to use it
+    } else {
+      // Pick a server:
+      $q = 'SELECT id, url, port FROM servers WHERE NOT occupied LIMIT 1';
+      $r = mysqli_query($dbc, $q);
+      if (mysqli_num_rows($r) == 1)
+        $data = mysqli_fetch_assoc($r);
+      else
+        redirect('/noservers');
+      $q = 'UPDATE servers SET occupied=TRUE, acquire_time=NOW(), session_id=\'' .
+        escape_data(session_id()) . '\' WHERE id=' . $data['id'];
+      $r = mysqli_query($dbc, $q);
+      if (mysqli_affected_rows($dbc) == 1)
+        $_SESSION['server_id'] = (int)$data['id'];
+      else
+        redirect('/noservers');
+    }
 
     $server = $data['url'] + ':' + $data['port'];
 

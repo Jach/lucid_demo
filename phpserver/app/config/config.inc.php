@@ -56,9 +56,9 @@ if ($local) {
 
 } else {
 
-  define('BASE_URI', '/home/jach/public_html/thejach.com/html/');
-  define('BASE_URL', 'http://www.thejach.com/');
-  define('APP_URI', '/home/jach/public_html/thejach.com/app/');
+  define('BASE_URI', '/home/us/public_html/demo/html/');
+  define('BASE_URL', 'http://www.dynamobi.com/demo/');
+  define('APP_URI', '/home/us/public_html/demo/app/');
 
   // STORE DB connectivity info variables as above, here:
   require_once APP_URI . 'config/dbinfo.php';
