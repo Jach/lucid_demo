@@ -19,6 +19,8 @@ authpass
 Recommended password generation service:
 https://www.fourmilab.ch/hotbits/secure_generate.html
 
+Run script scripts/update_adminui.sh from the scripts directory.
+
 PHP dependencies: PHP 5.3
 
 Script dependencies: wget, unzip, patch, curl, root privs
