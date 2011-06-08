@@ -27,7 +27,7 @@
 // You must edit the following settings on site-by-site basis.
 
 // Errors are emailed here.
-$contact_email = 'kevinmccloud@gmail.com';
+$contact_email = 'ksecretan@dynamobi.com';
 
 // Determine whether we're working on a local server or on the real server:
 if (mb_stristr($_SERVER['HTTP_HOST'], 'local') ||
@@ -56,9 +56,9 @@ if ($local) {
 
 } else {
 
-  define('BASE_URI', '/home/us/public_html/demo/html/');
+  define('BASE_URI', '/home/dynamobi/lucid_demo/phpserver/html/');
   define('BASE_URL', 'http://www.dynamobi.com/demo/');
-  define('APP_URI', '/home/us/public_html/demo/app/');
+  define('APP_URI', '/home/dynamobi/lucid_demo/phpserver/app/');
 
   // STORE DB connectivity info variables as above, here:
   require_once APP_URI . 'config/dbinfo.php';

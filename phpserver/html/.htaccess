@@ -5,7 +5,7 @@ Options +FollowSymLinks
 RewriteEngine On
 RewriteBase /
 
-#RewriteCond %{HTTP_HOST} !^(www.thejach.com|localhost|localthejach)$
-#RewriteRule ^(.*)$ http://www.thejach.com/$1 [L]
+#RewriteCond %{HTTP_HOST} !^(www.dynamobi.com|localhost)$
+#RewriteRule ^(.*)$ http://www.dynamobi.com/$1 [L]
 RewriteCond $1 !^(index\.php|imgs|js|css|flex|public|robots\.txt)
 RewriteRule ^(.*)$ /index.php?/$1 [L]
