@@ -57,7 +57,7 @@ if ($local) {
 } else {
 
   define('BASE_URI', '/home/dynamobi/lucid_demo/phpserver/html/');
-  define('BASE_URL', 'http://www.dynamobi.com/demo/');
+  define('BASE_URL', 'http://demo.dynamobi.com/');
   define('APP_URI', '/home/dynamobi/lucid_demo/phpserver/app/');
 
   // STORE DB connectivity info variables as above, here:

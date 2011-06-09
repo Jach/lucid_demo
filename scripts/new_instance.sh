@@ -22,9 +22,17 @@ EOD
 su - "user$N"
 cp -r /luciddb .
 # change server to be 8034 + N-users
-let "P=8034+$N"
-echo "alter system set \"serverHttpPort\" = $P;" | ./luciddb/bin/sqlineEngine
+let "LUCID=8034+$N"
+echo "alter system set \"serverHttpPort\" = $LUCID;" | ./luciddb/bin/sqlineEngine
 # change sa password?
+
+# change WS properties file
+cat > luciddb-jdbc.properties <<EOD
+jdbc.driver=org.luciddb.jdbc.LucidDbClientDriver
+jdbc.url=jdbc:luciddb:http://localhost:$LUCID
+jdbc.username=sa
+jdbc.password=
+EOD
 
 # change WS server to be 8000 - N-users, others we don't care about to be 7000-X
 cp -r /dynamodb-services .
