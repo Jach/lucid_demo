@@ -20,6 +20,7 @@ EOD
 . env.sh
 
 su - "user$N"
+echo $JAVA_HOME >> .bashrc
 cp -r /luciddb .
 # change server to be 8034 + N-users
 let "LUCID=8034+$N"

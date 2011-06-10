@@ -13,5 +13,7 @@ cd luciddb/install
 ./install.sh
 cd ROOT_DIR
 cat $pwd/load_data.sql | ./luciddb/bin/sqlineEngine
-cp -r -f luciddb /
+rm -rf /luciddb
+cp -r luciddb /
+rm -rf luciddb
 chmod -R +r /luciddb
