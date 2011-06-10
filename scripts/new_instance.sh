@@ -28,6 +28,13 @@ export N=$N
 "'
 source .bashrc
 cp -r /luciddb .
+# apparently we need to "reinstall"
+cd luciddb
+rm bin/classpath.gen
+rm -rf trace
+cd install
+./install.sh
+cd
 # change server to be 8034 + N-users
 let "LUCID=8034+$N"
 echo "alter system set \"serverHttpPort\" = $LUCID;" | ./luciddb/bin/sqllineEngine
