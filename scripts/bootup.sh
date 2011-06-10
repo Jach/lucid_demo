@@ -1,5 +1,6 @@
 #!/bin/sh
-# On a fresh boot from image this script should be run as root.
+# On a fresh bot from image this script should be run as root.
+set +x
 
 # Update LucidDB, AdminWS
 exec ./update_adminws.sh
