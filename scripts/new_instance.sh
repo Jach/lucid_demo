@@ -27,7 +27,7 @@ echo $JAVA_HOME >> .bashrc
 cp -r /luciddb .
 # change server to be 8034 + N-users
 let 'LUCID=8034+$N'
-echo 'alter system set \"serverHttpPort\" = $LUCID;' | ./luciddb/bin/sqlineEngine
+echo 'alter system set \"serverHttpPort\" = $LUCID;' | ./luciddb/bin/sqllineEngine
 # change sa password?
 
 # change WS properties file
