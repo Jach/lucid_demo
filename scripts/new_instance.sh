@@ -24,6 +24,7 @@ source env.sh
 
 su -l "user$N" -c "
 echo \"export JAVA_HOME=$JAVA_HOME\" >> .bashrc
+export JAVA_HOME=$JAVA_HOME
 export N=$N
 "'
 source .bashrc
