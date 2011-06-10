@@ -22,7 +22,7 @@ EOD
 
 source env.sh
 
-su -l "user$N" -c '
+env su -l "user$N" -c '
 echo $JAVA_HOME >> .bashrc
 cp -r /luciddb .
 # change server to be 8034 + N-users
