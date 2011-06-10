@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Use this for creating a new user and giving that user their own
 # LucidDB and AdminWS.
 # Run as root.

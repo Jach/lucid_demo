@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Use this for updating the adminUI served by PHP.
 
 cd ../phpserver/html

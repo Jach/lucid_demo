@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 # On a fresh bot from image this script should be run as root.
-set +x
+set -x
 
 # Update LucidDB, AdminWS
 exec ./update_adminws.sh

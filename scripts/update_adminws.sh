@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Use this for updating the common adminWS with tomcat.
 
 source env.sh
