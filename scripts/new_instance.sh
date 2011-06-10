@@ -15,13 +15,16 @@ let "N=`ls -l /home/ | grep -v ubuntu | wc -l`"
 # make a user
 useradd -m -G users -s /bin/bash "user$N"
 pw=`randpass`
-passwd "user$N" << EOD
+passwd "user$N" <<EOD
+$pw
+EOD <<EOD
 $pw
 EOD
 
 source env.sh
 
-su - "user$N"
+su "user$N"
+cd
 echo $JAVA_HOME >> .bashrc
 cp -r /luciddb .
 # change server to be 8034 + N-users
