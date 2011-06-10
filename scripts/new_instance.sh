@@ -22,12 +22,12 @@ EOD
 
 source env.sh
 
-env su -l "user$N" -c '
+su -l "user$N" -c "
 echo $JAVA_HOME >> .bashrc
 cp -r /luciddb .
 # change server to be 8034 + N-users
-let "LUCID=8034+$N"
-echo "alter system set \"serverHttpPort\" = $LUCID;" | ./luciddb/bin/sqlineEngine
+let 'LUCID=8034+$N'
+echo 'alter system set \"serverHttpPort\" = $LUCID;' | ./luciddb/bin/sqlineEngine
 # change sa password?
 
 # change WS properties file
@@ -41,19 +41,19 @@ EOD
 # change WS server to be 8000- N-users, others we do not care about to be 7000-X
 cp -r /dynamodb-services .
 cd dynamodb-services/conf
-let "P=8000-$N"
-sed -i -e s/port="8077"/port="$P"/g server.xml # http
-let "X=4*($N-1) + 1"
-let "P=7000-$X"
-sed -i -e s/port="8071"/port="$P"/g server.xml # shutdown
-let "X=$X-1"
-sed -i -e s/port="8073"/port="$P"/g server.xml # https
-let "X=$X-1"
-sed -i -e s/port="8072"/port="$P"/g server.xml # ajp
-let "X=$X-1"
-sed -i -e s/redirectPort="8443"/redirectPort="$P"/g server.xml # redirect
+let 'P=8000-$N'
+sed -i -e s/port=\"8077\"/port=\"$P\"/g server.xml # http
+let 'X=4*($N-1) + 1'
+let 'P=7000-$X'
+sed -i -e s/port=\"8071\"/port=\"$P\"/g server.xml # shutdown
+let 'X=$X-1'
+sed -i -e s/port=\"8073\"/port=\"$P\"/g server.xml # https
+let 'X=$X-1'
+sed -i -e s/port=\"8072\"/port=\"$P\"/g server.xml # ajp
+let 'X=$X-1'
+sed -i -e s/redirectPort=\"8443\"/redirectPort=\"$P\"/g server.xml # redirect
 
 # next script should reveal ourself
-'
+"
 # end of su command
 
