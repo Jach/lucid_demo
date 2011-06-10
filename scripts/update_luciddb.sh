@@ -2,7 +2,7 @@
 # Use this for updating and populating LucidDB.
 # Run as root.
 
-. env.sh
+source env.sh
 pwd=`pwd`
 
 cd ROOT_DIR

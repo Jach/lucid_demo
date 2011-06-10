@@ -1,7 +1,7 @@
 #!/bin/sh
 # Use this for updating the common adminWS with tomcat.
 
-. env.sh
+source env.sh
 
 cd ROOT_DIR
 

@@ -17,7 +17,7 @@ passwd "user$N" << EOD
 $pw
 EOD
 
-. env.sh
+source env.sh
 
 su - "user$N"
 echo $JAVA_HOME >> .bashrc
