@@ -6,14 +6,15 @@ source env.sh
 pwd=`pwd`
 
 cd $ROOT_DIR
-wget http://build.dynamobi.com/job/dy_dev_initbuild/label=lin64/lastSuccessfulBuild/artifact/luciddb/dist/luciddb.tar.bz2
+url=http://build.dynamobi.com/job/dy_dev_initbuild/70/label=lin64/artifact/luciddb/dist/luciddb.tar.bz2
+wget $url
 tar jxf luciddb.tar.bz2
 rm -f luciddb.tar.bz2
 mv luciddb-0.0.0 luciddb
 cd luciddb/install
 ./install.sh
 cd $ROOT_DIR
-cat $pwd/load_data.sql | ./luciddb/bin/sqlineEngine
+cat $pwd/load_data.sql | ./luciddb/bin/sqllineEngine
 rm -rf /luciddb
 cp -r luciddb /
 rm -rf luciddb
