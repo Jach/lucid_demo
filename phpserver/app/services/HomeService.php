@@ -84,11 +84,13 @@ class HomeService extends BaseAppService {
     if (!isset($params['authpass'], $params['url'], $params['port']) ||
         $params['authpass'] != $authpass)
       redirect('/');
-    $url = escape_data($params['url']);
-    $port = escape_data($params['port']);
-    $q = "INSERT INTO servers (url, port) VALUES ('$url', '$port')";
-    $r = mysqli_query($dbc, $q);
-    if (mysqli_affected_rows($dbc) == 1) {
+    $q = 'INSERT INTO servers (url, port) VALUES (?, ?)';
+    $stmt = mysqli_prepare($dbc, $q);
+    mysqli_stmt_bind_param($stmt, 'ss', $url, $port);
+    $url = $params['url'];
+    $port = $params['port'];
+    $r = mysqli_stmt_execute($stmt);
+    if (mysqli_stmt_affected_rows($stmt) == 1) {
       return ajax_response('Success');
     } else {
       return ajax_response('Failure', TRUE);
