@@ -7,6 +7,6 @@ set -x
 ./update_luciddb.sh
 # Make X users and announce them
 for i in {1..2}; do
-  ./new_instace.sh
+  ./new_instance.sh
 done
 # Start any monitoring daemons
