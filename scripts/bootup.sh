@@ -3,10 +3,10 @@
 set -x
 
 # Update LucidDB, AdminWS
-exec ./update_adminws.sh
-exec ./update_luciddb.sh
+./update_adminws.sh
+./update_luciddb.sh
 # Make X users and announce them
 for i in {1..2}; do
-  exec new_instace.sh
+  ./new_instace.sh
 done
 # Start any monitoring daemons
