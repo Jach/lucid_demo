@@ -3,6 +3,8 @@
 # LucidDB and AdminWS.
 # Run as root.
 
+set -x
+
 function randpass() {
   CHAR="[:graph:]"
   cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-32}

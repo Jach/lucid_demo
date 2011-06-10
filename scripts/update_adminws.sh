@@ -1,9 +1,10 @@
 #!/bin/bash
 # Use this for updating the common adminWS with tomcat.
+set -x
 
 source env.sh
 
-cd ROOT_DIR
+cd $ROOT_DIR
 
 wget http://build.dynamobi.com/job/dynamo_services/lastSuccessfulBuild/artifact/dynamodb-services/deploy/dynamobi-services.zip
 unzip -o dynamobi-services.zip
