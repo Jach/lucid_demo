@@ -23,7 +23,7 @@ EOD
 source env.sh
 
 su -l "user$N" -c "
-echo $JAVA_HOME >> .bashrc
+echo 'export JAVA_HOME=$JAVA_HOME' >> .bashrc
 export N=$N
 "'
 source .bashrc
