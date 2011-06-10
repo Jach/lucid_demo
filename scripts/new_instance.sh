@@ -17,14 +17,12 @@ useradd -m -G users -s /bin/bash "user$N"
 pw=`randpass`
 passwd "user$N" <<EOD
 $pw
-EOD <<EOD
 $pw
 EOD
 
 source env.sh
 
-su "user$N"
-cd
+su - "user$N" -c '
 echo $JAVA_HOME >> .bashrc
 cp -r /luciddb .
 # change server to be 8034 + N-users
@@ -40,7 +38,7 @@ jdbc.username=sa
 jdbc.password=
 EOD
 
-# change WS server to be 8000 - N-users, others we don't care about to be 7000-X
+# change WS server to be 8000- N-users, others we do not care about to be 7000-X
 cp -r /dynamodb-services .
 cd dynamodb-services/conf
 let "P=8000-$N"
@@ -56,3 +54,6 @@ let "X=$X-1"
 sed -i -e s/redirectPort="8443"/redirectPort="$P"/g server.xml # redirect
 
 # next script should reveal ourself
+'
+# end of su command
+
