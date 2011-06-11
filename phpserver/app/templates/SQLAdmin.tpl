@@ -54,7 +54,7 @@ if ( hasProductInstall && !hasRequestedVersion ) {
     var MMdoctitle = document.title;
 
 	AC_FL_RunContent(
-		"src", "playerProductInstall",
+		"src", "/flex/playerProductInstall",
 		"FlashVars", "MMredirectURL="+MMredirectURL+'&MMplayerType='+MMPlayerType+'&MMdoctitle='+MMdoctitle+"",
 		"width", "100%",
 		"height", "100%",
@@ -71,7 +71,7 @@ if ( hasProductInstall && !hasRequestedVersion ) {
 	// if we've detected an acceptable version
 	// embed the Flash Content SWF when all tests are passed
 	AC_FL_RunContent(
-			"src", "SQLAdmin",
+			"src", "/flex/SQLAdmin",
 			"width", "100%",
 			"height", "100%",
 			"align", "middle",
@@ -101,7 +101,7 @@ if ( hasProductInstall && !hasRequestedVersion ) {
 			<param name="quality" value="high" />
 			<param name="bgcolor" value="#869ca7" />
 			<param name="allowScriptAccess" value="sameDomain" />
-			<embed src="SQLAdmin.swf" quality="high" bgcolor="#869ca7"
+			<embed src="/flex/SQLAdmin.swf" quality="high" bgcolor="#869ca7"
 				width="100%" height="100%" name="SQLAdmin" align="middle"
 				play="true"
 				loop="false"
@@ -113,6 +113,6 @@ if ( hasProductInstall && !hasRequestedVersion ) {
 			</embed>
 	</object>
 </noscript>
-<iframe name="_history" src="history.htm" frameborder="0" scrolling="no" width="22" height="0"></iframe>
+<iframe name="_history" src="/flex/history.htm" frameborder="0" scrolling="no" width="22" height="0"></iframe>
 </body>
 </html>

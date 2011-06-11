@@ -1,6 +1,6 @@
---- SQLAdmin.ht2	2011-06-03 12:42:44.938664873 -0700
-+++ SQLAdmin.tpl2	2011-06-03 12:24:15.816468526 -0700
-@@ -1,9 +1,14 @@
+--- SQLAdmin.html	2011-06-10 18:21:54.907122909 -0700
++++ SQLAdmin.tpl	2011-06-10 18:27:50.217145923 -0700
+@@ -1,9 +1,18 @@
 -<!-- saved from url=(0014)about:internet -->
 -<html lang="en">
 +<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -14,13 +14,17 @@
 +  <title><?php echo $title; ?></title>
 +  <link rel="shortcut icon" href="/imgs/favicon.ico" />
 +  <link rel="stylesheet" href="/css/mainstyle.css" />
++  <script type="text/javascript">
++    BASE_URL = "<?php echo BASE_URL; ?>";
++  </script>
++  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 +  <script type="text/javascript" src="/js/mainjs.js"></script>
 +
 +  <script src="/flex/AC_OETags.js" language="javascript"></script>
  <style>
  body { margin: 0px; overflow:hidden }
  </style>
-@@ -23,7 +28,7 @@
+@@ -23,7 +32,7 @@
  </head>
  
  <body scroll="no">
@@ -29,7 +33,25 @@
  <script language="JavaScript" type="text/javascript">
  <!--
  // Version check for the Flash Player that has the ability to start Player Product Install (6.0r65)
-@@ -70,7 +75,7 @@
+@@ -45,7 +54,7 @@
+     var MMdoctitle = document.title;
+ 
+ 	AC_FL_RunContent(
+-		"src", "playerProductInstall",
++		"src", "/flex/playerProductInstall",
+ 		"FlashVars", "MMredirectURL="+MMredirectURL+'&MMplayerType='+MMPlayerType+'&MMdoctitle='+MMdoctitle+"",
+ 		"width", "100%",
+ 		"height", "100%",
+@@ -62,7 +71,7 @@
+ 	// if we've detected an acceptable version
+ 	// embed the Flash Content SWF when all tests are passed
+ 	AC_FL_RunContent(
+-			"src", "SQLAdmin",
++			"src", "/flex/SQLAdmin",
+ 			"width", "100%",
+ 			"height", "100%",
+ 			"align", "middle",
+@@ -70,7 +79,7 @@
  			"quality", "high",
  			"bgcolor", "#869ca7",
  			"name", "SQLAdmin",
@@ -38,7 +60,7 @@
  			"allowScriptAccess","sameDomain",
  			"type", "application/x-shockwave-flash",
  			"pluginspage", "http://www.adobe.com/go/getflashplayer"
-@@ -87,7 +92,7 @@
+@@ -87,12 +96,12 @@
    	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
  			id="SQLAdmin" width="100%" height="100%"
  			codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
@@ -47,7 +69,13 @@
  			<param name="movie" value="SQLAdmin.swf" />
  			<param name="quality" value="high" />
  			<param name="bgcolor" value="#869ca7" />
-@@ -100,7 +105,7 @@
+ 			<param name="allowScriptAccess" value="sameDomain" />
+-			<embed src="SQLAdmin.swf" quality="high" bgcolor="#869ca7"
++			<embed src="/flex/SQLAdmin.swf" quality="high" bgcolor="#869ca7"
+ 				width="100%" height="100%" name="SQLAdmin" align="middle"
+ 				play="true"
+ 				loop="false"
+@@ -100,10 +109,10 @@
  				allowScriptAccess="sameDomain"
  				type="application/x-shockwave-flash"
  				pluginspage="http://www.adobe.com/go/getflashplayer"
@@ -56,3 +84,7 @@
  			</embed>
  	</object>
  </noscript>
+-<iframe name="_history" src="history.htm" frameborder="0" scrolling="no" width="22" height="0"></iframe>
++<iframe name="_history" src="/flex/history.htm" frameborder="0" scrolling="no" width="22" height="0"></iframe>
+ </body>
+ </html>
