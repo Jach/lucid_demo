@@ -66,7 +66,7 @@ sed -i -e s/redirectPort="8443"/redirectPort="$P"/g server.xml # redirect
 cd ../webapps
 mkdir adminws
 cd adminws
-unzip adminws.war
+unzip ../adminws.war
 mv ~/luciddb-jdbc.properties WEB-INF/classes/
 
 # next script should reveal ourself
