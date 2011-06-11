@@ -28,7 +28,7 @@ class HomeService extends BaseAppService {
       // try to give them old server if they were the last to use it
     } else {
       // Pick a server:
-      $q = 'SELECT id, url, port FROM servers WHERE occupied <> 0 LIMIT 1';
+      $q = 'SELECT id, url, port FROM servers WHERE occupied=0 LIMIT 1';
       $r = mysqli_query($dbc, $q);
       if (mysqli_num_rows($r) == 1)
         $data = mysqli_fetch_assoc($r);
