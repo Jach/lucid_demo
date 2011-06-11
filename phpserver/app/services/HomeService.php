@@ -87,7 +87,7 @@ class HomeService extends BaseAppService {
     $q = 'INSERT INTO servers (url, port) VALUES (?, ?)';
     $stmt = mysqli_prepare($dbc, $q);
     mysqli_stmt_bind_param($stmt, 'ss', $url, $port);
-    $url = $params['url'];
+    $url = 'http://' . $params['url'];
     $port = $params['port'];
     $r = mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt) == 1) {
