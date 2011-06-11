@@ -53,16 +53,16 @@ EOD
 cp -r /dynamodb-services .
 cd dynamodb-services/conf
 let "P=8000-$N"
-sed -i -e s/port="8077"/port="$P"/g server.xml # http
+sed -i -e "s/port=\"8077\"/port=\"$P\"/g" server.xml # http
 let "P=4*($N-1) + 1"
 let "P=7000-$P"
-sed -i -e s/port="8071"/port="$P"/g server.xml # shutdown
+sed -i -e "s/port=\"8071\"/port=\"$P\"/g" server.xml # shutdown
 let "P=$P-1"
-sed -i -e s/port="8073"/port="$P"/g server.xml # https
+sed -i -e "s/port=\"8073\"/port=\"$P\"/g" server.xml # https
 let "P=$P-1"
-sed -i -e s/port="8072"/port="$P"/g server.xml # ajp
+sed -i -e "s/port=\"8072\"/port=\"$P\"/g" server.xml # ajp
 let "P=$P-1"
-sed -i -e s/redirectPort="8443"/redirectPort="$P"/g server.xml # redirect
+sed -i -e "s/redirectPort=\"8443\"/redirectPort=\"$P\"/g" server.xml # redirect
 cd ../webapps
 mkdir adminws
 cd adminws
