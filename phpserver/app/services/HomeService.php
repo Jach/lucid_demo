@@ -43,7 +43,7 @@ class HomeService extends BaseAppService {
         redirect('/noservers');
     }
 
-    $server = $data['url'] . ':' . $data['port'];
+    $server = $data['url'] . ':' . $data['port'] . '/adminws/ns0.wsdl';
 
     $template_data = array(
         'title' => 'AdminUI'
