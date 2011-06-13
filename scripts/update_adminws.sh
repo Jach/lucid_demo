@@ -9,7 +9,12 @@ wget http://build.dynamobi.com/job/dynamo_services/lastSuccessfulBuild/artifact/
 unzip -o dynamobi-services.zip
 rm -f dynamobi-services.zip
 cd dynamodb-services
-rm -rf webapps/ROOT webapps/adminui.war
+rm -rf webapps/ROOT/* webapps/adminui.war
+cat > webapps/ROOT/crossdomain.xml <<EOD
+<cross-domain-policy>
+  <allow-access-from domain="demo.dynamobi.com" />
+</cross-domain-policy>
+EOD
 cd ..
 rm -rf /dynamodb-services
 cp -r dynamodb-services /
