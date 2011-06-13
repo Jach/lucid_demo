@@ -16,12 +16,15 @@ class ReverseProxyService extends BaseAppService {
 
     $server = 'http://ec2-50-17-174-36.compute-1.amazonaws.com:7999';
     curl_setopt($ch, CURLOPT_URL, $server . '/adminws/' . implode('/', $params['all']));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
     curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, apache_request_headers());
     if (!empty($_POST)) {
       curl_setopt($ch, CURLOPT_POST, true);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
+    } else {
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $_SERVER['REQUEST_METHOD']);
     }
 
     $response = curl_exec($ch);
