@@ -98,7 +98,7 @@ class BaseService {
         // for params, pass in the uri elements minus the first N that are
         // in front of <all>. e.g. /blah/<all> means if the uri is
         // /borg/bloop, only bloop gets passed.
-        $rest_parts = array_slice($uri_parts, count($url_parts));
+        $rest_parts = array_slice($uri_parts, count($url_parts)-1);
         $params['all'] = $rest_parts;
         $call = $function;
         break;
