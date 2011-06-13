@@ -1,5 +1,5 @@
 --- SQLAdmin.html	2011-06-10 18:21:54.907122909 -0700
-+++ SQLAdmin.tpl	2011-06-10 18:27:50.217145923 -0700
++++ SQLAdmin.tpl	2011-06-13 09:51:42.207960228 -0700
 @@ -1,9 +1,18 @@
 -<!-- saved from url=(0014)about:internet -->
 -<html lang="en">
@@ -56,7 +56,7 @@
  			"bgcolor", "#869ca7",
  			"name", "SQLAdmin",
 -			"flashvars",'resultlimit=500&server=&database=&username=sa&password=&webservice=&historyUrl=history.htm%3F&lconid=' + lc_id + '',
-+      "flashvars",'resultlimit=500&server=<?php echo $server; ?>&database=&username=sa&password=&webservice=&historyUrl=history.htm%3F&lconid=' + lc_id + '',
++      "flashvars",'resultlimit=500&server=&database=&username=sa&password=<?php echo $password; ?>&webservice=<?php echo $server; ?>&historyUrl=history.htm%3F&lconid=' + lc_id + '',
  			"allowScriptAccess","sameDomain",
  			"type", "application/x-shockwave-flash",
  			"pluginspage", "http://www.adobe.com/go/getflashplayer"
@@ -65,7 +65,7 @@
  			id="SQLAdmin" width="100%" height="100%"
  			codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
 -			<param name="flashvars" value="resultlimit=500&server=&database=&username=sa&password=&webservice=">
-+      <param name="flashvars" value="resultlimit=500&server=<?php echo $server; ?>&database=&username=sa&password=&webservice=">
++      <param name="flashvars" value="resultlimit=500&server=&database=&username=sa&password=<?php echo $password; ?>&webservice=<?php echo $server; ?>">
  			<param name="movie" value="SQLAdmin.swf" />
  			<param name="quality" value="high" />
  			<param name="bgcolor" value="#869ca7" />
@@ -80,7 +80,7 @@
  				type="application/x-shockwave-flash"
  				pluginspage="http://www.adobe.com/go/getflashplayer"
 -				flashVars="resultlimit=5000&server=&database=&username=sa&password=&webservice=">
-+        flashVars="resultlimit=5000&server=<?php echo $server; ?>&database=&username=sa&password=&webservice=">
++        flashVars="resultlimit=5000&server=&database=&username=sa&password=<?php echo $password; ?>&webservice=<?php echo $server; ?>">
  			</embed>
  	</object>
  </noscript>

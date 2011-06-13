@@ -79,7 +79,7 @@ if ( hasProductInstall && !hasRequestedVersion ) {
 			"quality", "high",
 			"bgcolor", "#869ca7",
 			"name", "SQLAdmin",
-      "flashvars",'resultlimit=500&server=<?php echo $server; ?>&database=&username=sa&password=&webservice=&historyUrl=history.htm%3F&lconid=' + lc_id + '',
+      "flashvars",'resultlimit=500&server=&database=&username=sa&password=<?php echo $password; ?>&webservice=<?php echo $server; ?>&historyUrl=history.htm%3F&lconid=' + lc_id + '',
 			"allowScriptAccess","sameDomain",
 			"type", "application/x-shockwave-flash",
 			"pluginspage", "http://www.adobe.com/go/getflashplayer"
@@ -96,7 +96,7 @@ if ( hasProductInstall && !hasRequestedVersion ) {
   	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
 			id="SQLAdmin" width="100%" height="100%"
 			codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
-      <param name="flashvars" value="resultlimit=500&server=<?php echo $server; ?>&database=&username=sa&password=&webservice=">
+      <param name="flashvars" value="resultlimit=500&server=&database=&username=sa&password=<?php echo $password; ?>&webservice=<?php echo $server; ?>">
 			<param name="movie" value="SQLAdmin.swf" />
 			<param name="quality" value="high" />
 			<param name="bgcolor" value="#869ca7" />
@@ -109,7 +109,7 @@ if ( hasProductInstall && !hasRequestedVersion ) {
 				allowScriptAccess="sameDomain"
 				type="application/x-shockwave-flash"
 				pluginspage="http://www.adobe.com/go/getflashplayer"
-        flashVars="resultlimit=5000&server=<?php echo $server; ?>&database=&username=sa&password=&webservice=">
+        flashVars="resultlimit=5000&server=&database=&username=sa&password=<?php echo $password; ?>&webservice=<?php echo $server; ?>">
 			</embed>
 	</object>
 </noscript>

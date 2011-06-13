@@ -49,6 +49,7 @@ class HomeService extends BaseAppService {
         'title' => 'AdminUI'
       , 'master' => 'SQLAdmin.tpl'
       , 'server' => $server
+      , 'password' => ''
     );
     $this->display_page($template_data);
   }
