@@ -24,7 +24,7 @@ class ReverseProxyService extends BaseAppService {
       foreach ($_SERVER as $key => $val) {
         if (mb_substr($key, 0, 5) == 'HTTP_') {
           $key = ucwords(mb_strtolower(str_replace('_', ' ', mb_substr($key, 5))));
-          $key = str_replace(' ', '-');
+          $key = str_replace(' ', '-', $key);
           $out[$key] = $val;
         }
       }
