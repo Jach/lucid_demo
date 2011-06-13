@@ -36,8 +36,8 @@ $service = $uri_parts[0];
 switch($service) {
 
   // Public pages
-  case 'user': $serviceClass = 'UserService'; break;
-  case 'feed': $serviceClass = 'FeedService'; break;
+  case 'adminws':
+    $serviceClass = 'ReverseProxyService'; break;
 
   // Home (also public)
   case 'index':

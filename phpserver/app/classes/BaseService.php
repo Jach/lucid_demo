@@ -93,6 +93,16 @@ class BaseService {
       if ($url{0} == '/')
         $url = mb_substr($url, 1); // chop the first / if there
       $url_parts = explode('/', $url);
+
+      if (($pos = mb_stripos($url, '<all>')) !== FALSE) { // globber function
+        // for params, pass in the uri elements minus the first N that are
+        // in front of <all>. e.g. /blah/<all> means if the uri is
+        // /borg/bloop, only bloop gets passed.
+        $rest_parts = array_slice($uri_parts, count($url_parts));
+        $params['all'] = $rest_parts;
+        $call = $function;
+        break;
+      }
       if (count($url_parts) != count($uri_parts)) {
         continue; // not this url
       } elseif ($url == implode('/', $uri_parts)) { // exact, found it
