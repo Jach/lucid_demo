@@ -26,7 +26,7 @@ class ReverseProxyService extends BaseAppService {
       echo curl_error($ch);
     else {
       curl_close($ch);
-      $response = str_replace($server, 'http://demo.luciddb.com', $response);
+      $response = str_replace($server, 'http://demo.dynamobi.com', $response);
       echo $response;
     }
   }
