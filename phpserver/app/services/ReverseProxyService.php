@@ -19,7 +19,18 @@ class ReverseProxyService extends BaseAppService {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
     curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, getallheaders());
+    $headers = function() {
+      $out = array();
+      foreach ($_SERVER as $key => $val) {
+        if (mb_substr($key, 0, 5) == 'HTTP_') {
+          $key = ucwords(mb_strtolower(str_replace('_', ' ', mb_substr($key, 5)))) );
+          $key = str_replace(' ', '-');
+          $out[$key] = $val;
+        }
+      }
+      return $out;
+    };
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers());
     if (!empty($_POST)) {
       curl_setopt($ch, CURLOPT_POST, true);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
