@@ -36,8 +36,6 @@ $service = $uri_parts[0];
 switch($service) {
 
   // Public pages
-  case 'adminws':
-    $serviceClass = 'ReverseProxyService'; break;
 
   // Home (also public)
   case 'index':
