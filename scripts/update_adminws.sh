@@ -15,7 +15,7 @@ cat > webapps/ROOT/crossdomain.xml <<EOD
 <cross-domain-policy>
   <site-control permitted-cross-domain-policies="master-only" />
   <allow-access-from domain="demo.dynamobi.com" />
-  <allow-http-request-headers-from-domain="demo.dynamobi.com" headers="*" />
+  <allow-http-request-headers-from domain="demo.dynamobi.com" headers="*" />
 </cross-domain-policy>
 EOD
 cd ..
