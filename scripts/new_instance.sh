@@ -6,7 +6,8 @@
 set -x
 
 function randpass() {
-  CHAR="[:graph:]"
+  #CHAR="[:graph:]"
+  CHAR="[:alnum:]"
   cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-32}
   echo
 }
