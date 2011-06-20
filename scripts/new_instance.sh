@@ -51,7 +51,7 @@ cat > luciddb-jdbc.properties <<EOD
 jdbc.driver=org.luciddb.jdbc.LucidDbClientDriver
 jdbc.url=jdbc:luciddb:http://localhost:$LUCID
 jdbc.username=sa
-jdbc.password=
+jdbc.password='"$sapass"'
 EOD
 
 # change WS server to be 8000- N-users, others we do not care about to be 7000-X
