@@ -13,6 +13,7 @@ class HomeService extends BaseAppService {
       , 'get:/adminui' => 'disp_adminui'
       , ':/reserve/@id' => 'reserve_server'
       , ':/register_server/@authpass/@url/@port/@sapass' => 'register_server'
+      , 'get,post:/invalidate_sessions' => 'invalidate_sessions'
       );
 
     if(!$internal) parent::__construct();
@@ -124,6 +125,27 @@ class HomeService extends BaseAppService {
     } else {
       return ajax_response('Failure', TRUE);
     }
+  }
+
+  function invalidate_sessions($params) {
+    global $dbc;
+    // Force any sessions off that have been around for 2 hours
+    // or haven't pinged for 4 mins (gives them a couple chances to
+    // ping late)
+    $q = 'SELECT id, url, port FROM servers WHERE occupied=1 AND ' .
+      '(DATE_ADD(acquire_time, INTERVAL 2 HOUR) < NOW() OR ' .
+      'DATE_ADD(last_used, INTERVAL 4 MINUTE) < NOW())';
+    $r = mysqli_query($dbc, $q);
+    $rows = array();
+    $ids = array();
+    while ($row = mysqli_fetch_assoc($r)) {
+      $rows[] = $row;
+      $ids[] = (int)$row['id'];
+    }
+    $q = 'UPDATE servers SET occupied=0 WHERE id IN (' . implode(',', $ids) . ')';
+    $r = mysqli_query($dbc, $q);
+    // TODO: tell server to reset its data.
+
   }
 
 }
