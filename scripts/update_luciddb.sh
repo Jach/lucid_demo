@@ -6,7 +6,7 @@ source env.sh
 pwd=`pwd`
 
 cd $ROOT_DIR
-url=http://build.dynamobi.com/job/dy_dev_initbuild/70/label=lin64/artifact/luciddb/dist/luciddb.tar.bz2
+url=http://build.dynamobi.com/job/dy_dev_initbuild/label=lin64/lastSuccessfulBuild/artifact/luciddb/dist/luciddb.tar.bz2
 wget $url
 tar jxf luciddb.tar.bz2
 rm -f luciddb.tar.bz2
