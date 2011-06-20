@@ -6,7 +6,7 @@ set -x
 ./update_adminws.sh
 ./update_luciddb.sh
 # Make X users and announce them
-for i in {1..2}; do
+for i in {1..6}; do
   ./new_instance.sh
   let WS_PORT="8000 - $i"
   WS_PORT=$WS_PORT USER=user$i ./reveal_self.sh
