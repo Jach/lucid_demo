@@ -146,6 +146,7 @@ class HomeService extends BaseAppService {
     $r = mysqli_query($dbc, $q);
     // TODO: tell server to reset its data.
 
+    return ajax_response('Okay');
   }
 
 }
