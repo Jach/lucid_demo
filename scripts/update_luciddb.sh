@@ -18,4 +18,4 @@ cat $pwd/load_data.sql | ./luciddb/bin/sqllineEngine
 rm -rf /luciddb
 cp -r luciddb /
 rm -rf luciddb
-chmod -R +r /luciddb
+chmod -R o+r /luciddb

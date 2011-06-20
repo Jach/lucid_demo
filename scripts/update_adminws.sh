@@ -22,4 +22,4 @@ cd ..
 rm -rf /dynamodb-services
 cp -r dynamodb-services /
 rm -rf dynamodb-services
-chmod -R +r /dynamodb-services
+chmod -R o+r /dynamodb-services
