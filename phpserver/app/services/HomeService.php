@@ -11,45 +11,70 @@ class HomeService extends BaseAppService {
       , ':/noservers' => 'disp_no_servers'
       , 'get:/ping' => 'ping'
       , 'get:/adminui' => 'disp_adminui'
-      , ':/register_server/@authpass/@url/@port' => 'register_server'
+      , ':/reserve/@id' => 'reserve_server'
+      , ':/register_server/@authpass/@url/@port/@sapass' => 'register_server'
       );
 
     if(!$internal) parent::__construct();
   }
 
   function disp_home_page($params) {
-    redirect('/adminui');
+    $list = get_servers_list();
+    $template_data = array(
+        'title' => 'LucidDB AdminUI Demo'
+      , 'master' => 'SQLAdmin.tpl'
+      , 'content' => 'content/home.tpl'
+      , 'servers' => $list
+    );
+    $this->display_page($template_data);
+  }
+
+  function get_servers_list() {
+    global $dbc;
+    $q = 'SELECT id, occupied FROM servers';
+    $r = mysqli_query($dbc, $q);
+    $servers = array();
+    while ($row = mysqli_fetch_assoc($r)) {
+      $servers[] = $row;
+    }
+    return $servers;
+  }
+
+  function reserve_server($params) {
+    global $dbc;
+    $id = (int)$params['id'];
+    $q = 'UPDATE servers SET occupied=1, acquire_time=NOW(), session_id=\'' .
+      escape_data(session_id()) . '\' WHERE occupied=0 and id=' . $id;
+    $r = mysqli_query($dbc, $q);
+    if (mysqli_affected_rows($dbc) == 1) {
+      $_SESSION['server_id'] = $id;
+      redirect('/adminui');
+    } else {
+      redirect('/');
+    }
   }
 
   function disp_adminui($params) {
-    global $dbc;
-    $data = array();
-    if (isset($_SESSION['server_id'])) {
-      // try to give them old server if they were the last to use it
-    } else {
-      // Pick a server:
-      $q = 'SELECT id, url, port FROM servers WHERE occupied=0 LIMIT 1';
-      $r = mysqli_query($dbc, $q);
-      if (mysqli_num_rows($r) == 1)
-        $data = mysqli_fetch_assoc($r);
-      else
-        redirect('/noservers');
-      $q = 'UPDATE servers SET occupied=TRUE, acquire_time=NOW(), session_id=\'' .
-        escape_data(session_id()) . '\' WHERE id=' . $data['id'];
-      $r = mysqli_query($dbc, $q);
-      if (mysqli_affected_rows($dbc) == 1)
-        $_SESSION['server_id'] = (int)$data['id'];
-      else
-        redirect('/noservers');
+    if (!isset($_SESSION, $_SESSION['server_id'])) {
+      redirect('/');
     }
+    global $dbc;
+    $q = 'SELECT url, port, sapass FROM servers WHERE id=' .
+      (int)$_SESSION['server_id'];
+    $r = mysqli_query($dbc, $q);
+    $data = array();
+    if (mysqli_num_rows($r) == 1)
+      $data = mysqli_fetch_assoc($r);
+    else
+      redirect('/');
 
     $server = $data['url'] . ':' . $data['port'] . '/adminws/ns0.wsdl';
 
     $template_data = array(
         'title' => 'AdminUI'
       , 'master' => 'SQLAdmin.tpl'
-      , 'server' => ''//$server
-      , 'password' => ''
+      , 'server' => $server
+      , 'password' => $data['sapass']
     );
     $this->display_page($template_data);
   }
@@ -82,14 +107,17 @@ class HomeService extends BaseAppService {
   function register_server($params) {
     global $authpass; // expected from dbinfo.php
     global $dbc;
-    if (!isset($params['authpass'], $params['url'], $params['port']) ||
+    if (!isset($params['authpass'], $params['url'], $params['port'], $params['sapass']) ||
         $params['authpass'] != $authpass)
       redirect('/');
-    $q = 'INSERT INTO servers (url, port) VALUES (?, ?)';
+    $q = 'INSERT INTO servers (url, port, sapass) VALUES (?, ?, ?)';
     $stmt = mysqli_prepare($dbc, $q);
-    mysqli_stmt_bind_param($stmt, 'ss', $url, $port);
+
+    mysqli_stmt_bind_param($stmt, 'sss', $url, $port, $sapass);
     $url = 'http://' . $params['url'];
     $port = $params['port'];
+    $sapass = $params['sapass'];
+
     $r = mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt) == 1) {
       return ajax_response('Success');

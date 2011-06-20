@@ -20,6 +20,9 @@ $pw
 $pw
 EOD
 
+# sa pass
+sapass=`randpass`
+
 source env.sh
 
 su -l "user$N" -c "
@@ -39,7 +42,8 @@ cd
 # change server to be 8034 + N-users
 let "LUCID=8034+$N"
 echo "alter system set \"serverHttpPort\" = $LUCID;" | ./luciddb/bin/sqllineEngine
-# change sa password?
+# change sa password
+echo "CREATE or REPLACE USER \"sa\" IDENTIFIED BY '"'$sapass'"';" | ./luciddb/bin/sqllineEngine
 
 # change WS properties file
 cat > luciddb-jdbc.properties <<EOD
@@ -72,4 +76,4 @@ mv ~/luciddb-jdbc.properties WEB-INF/classes/
 # next script should reveal ourself
 '
 # end of su command
-
+echo $sapass > sapass

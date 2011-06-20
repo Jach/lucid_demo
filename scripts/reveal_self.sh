@@ -10,6 +10,8 @@ cd ~/dynamodb-services
 chmod +x ./bin/*.sh
 ./bin/startup.sh
 "
+sleep 60 # give time for things to start up
 WS_SERVER=`ec2metadata | grep public-hostname | sed -e "s/^.* //"`
 pw=`cat authpass.txt | sed -e s:\n::`
-curl "$DEMO_SERVER/register_server/$pw/$WS_SERVER/$WS_PORT"
+sapass=`cat sapass | sed -e s:\n::`
+curl "$DEMO_SERVER/register_server/$pw/$WS_SERVER/$WS_PORT/$sapass"
