@@ -3,7 +3,7 @@
 
 <?php
 foreach ($servers as $server) {
-  echo "\n<tr><td>Server #{$server['id']}</td></tr>";
+  echo "\n<tr><td>Server #{$server['id']}</td><td>";
   if ($server['occupied']) {
     echo 'Unavailable';
   } else {
