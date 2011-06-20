@@ -22,7 +22,7 @@ class HomeService extends BaseAppService {
     $list = $this->get_servers_list();
     $template_data = array(
         'title' => 'LucidDB AdminUI Demo'
-      , 'master' => 'SQLAdmin.tpl'
+      , 'master' => 'master.tpl'
       , 'content' => 'content/home.tpl'
       , 'servers' => $list
     );
