@@ -10,5 +10,6 @@ for i in {1..2}; do
   ./new_instance.sh
   let WS_PORT="8000 - $i"
   WS_PORT=$WS_PORT USER=user$i ./reveal_self.sh
+  chmod -R o-wrx /home/user$i
 done
 # Start any monitoring daemons
