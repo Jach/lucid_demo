@@ -21,6 +21,8 @@ https://www.fourmilab.ch/hotbits/secure_generate.html
 
 Run script scripts/update_adminui.sh from the scripts directory.
 
+Put a cronjob to curl /invalidate_sessions every 5 minutes or so.
+
 PHP dependencies: PHP 5.3
 
 Script dependencies: wget, unzip, patch, curl, root privs
