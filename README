@@ -25,4 +25,11 @@ Put a cronjob to curl /invalidate_sessions every 5 minutes or so.
 
 PHP dependencies: PHP 5.3
 
-Script dependencies: wget, unzip, patch, curl, root privs
+Script dependencies: Linux, wget, unzip, patch, curl, root privs
+
+License: files under phpserver are covered by the GPLv3.
+Anything else is covered under the WTFPL.
+All source is free software. It comes without any warranty, to
+the extent permitted by applicable law. You can redistribute it
+and/or modify it under the terms of their respective licenses,
+see included COPYING files for details.
