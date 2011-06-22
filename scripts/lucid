@@ -10,7 +10,7 @@ case "$1" in
     ;;
   stop)
     echo "Stopping lucid demo..."
-    ./kill_users.sh &
+    ./kill_users.sh
     ;;
   *)
     echo "Usage: /etc/init.d/lucid {start|stop}"
