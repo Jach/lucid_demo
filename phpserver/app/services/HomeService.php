@@ -156,14 +156,13 @@ class HomeService extends BaseAppService {
     }
     $q = 'UPDATE servers SET occupied=0 WHERE id IN (' . implode(',', $ids) . ')';
     $r = mysqli_query($dbc, $q);
-    // TODO: tell server to reset its data.
+    // TODO: tell server to reset its data for users.
 
 
     // TODO:
     // Shut down the instance if no servers have been accessed in 4 hours.
     $q = 'SELECT id FROM servers WHERE DATE_ADD(last_used, INTERVAL 4 HOUR) < NOW()';
 
-    // TODO:
     // Ping servers and remove from the list if they're not up.
     $servers = $this->get_servers_list();
     $ids = array();
