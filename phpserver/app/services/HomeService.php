@@ -21,7 +21,7 @@ class HomeService extends BaseAppService {
 
   function disp_home_page($params) {
     // send them back to their adminui if they've still got a session
-    if (!isset($_SESSION['server_id'])) {
+    if (isset($_SESSION['server_id'])) {
       global $dbc;
       $q = 'SELECT id FROM servers WHERE occupied=1 AND session_id=\'' .
         escape_data(session_id()) . '\'';
