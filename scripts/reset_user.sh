@@ -5,6 +5,6 @@
 
 let USER_N="8000 - $WS_PORT"
 
-USER_N=USER_N ./new_instance.sh
+USER_N=$USER_N ./new_instance.sh
 WS_PORT=$WS_PORT USER=user$USER_N ./reveal_self.sh
 chmod -R o-wrx /home/user$i
