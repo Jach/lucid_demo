@@ -1,0 +1,20 @@
+#!/bin/bash
+# put this in your /etc/init.d folder, then
+# run update-rc.d lucid defaults
+
+cd /home/ubuntu/lucid_demo/scripts
+case "$1" in
+  start)
+    echo "Starting lucid demo bootup..."
+    ./bootup.sh &
+    ;;
+  stop)
+    echo "Stopping lucid demo..."
+    ./kill_users.sh &
+    ;;
+  *)
+    echo "Usage: /etc/init.d/lucid {start|stop}"
+    exit 1
+    ;;
+esac
+exit 0
