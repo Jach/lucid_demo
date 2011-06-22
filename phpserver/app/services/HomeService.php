@@ -20,6 +20,15 @@ class HomeService extends BaseAppService {
   }
 
   function disp_home_page($params) {
+    // send them back to their adminui if they've still got a session
+    if (!isset($_SESSION['server_id'])) {
+      global $dbc;
+      $q = 'SELECT id FROM servers WHERE occupied=1 AND session_id=\'' .
+        escape_data(session_id()) . '\'';
+      $r = mysqli_query($dbc, $q);
+      if (mysqli_num_rows($dbc) == 1)
+        redirect('/adminui');
+    }
     $list = $this->get_servers_list();
     $template_data = array(
         'title' => 'LucidDB AdminUI Demo'
