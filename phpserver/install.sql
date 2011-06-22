@@ -16,5 +16,6 @@ CREATE TABLE servers (
   session_id CHAR(32) DEFAULT NULL,
   INDEX sess_ind (session_id),
   FOREIGN KEY (session_id) REFERENCES sessions(id)
-    ON DELETE SET NULL
+    ON DELETE SET NULL,
+  UNIQUE KEY (url, port)
 ) ENGINE=INNODB;

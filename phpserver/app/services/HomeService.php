@@ -112,10 +112,11 @@ class HomeService extends BaseAppService {
     if (!isset($params['authpass'], $params['url'], $params['port'], $params['sapass']) ||
         $params['authpass'] != $authpass)
       redirect('/');
-    $q = 'INSERT INTO servers (url, port, sapass) VALUES (?, ?, ?)';
+    $q = 'INSERT INTO servers (url, port, sapass, lastused) VALUES ' .
+      '(?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE sapass=?, lastused=NOW()';
     $stmt = mysqli_prepare($dbc, $q);
 
-    mysqli_stmt_bind_param($stmt, 'sss', $url, $port, $sapass);
+    mysqli_stmt_bind_param($stmt, 'ssss', $url, $port, $sapass, $sapass);
     $url = 'http://' . $params['url'];
     $port = $params['port'];
     $sapass = $params['sapass'];
@@ -128,6 +129,7 @@ class HomeService extends BaseAppService {
     }
   }
 
+  // This should be called periodically.
   function invalidate_sessions($params) {
     global $dbc;
     // Force any sessions off that have been around for 2 hours
@@ -149,12 +151,21 @@ class HomeService extends BaseAppService {
 
 
     // TODO:
-    // Shut down the instance if no servers have been accessed in a while.
+    // Shut down the instance if no servers have been accessed in 4 hours.
+    $q = 'SELECT id FROM servers WHERE DATE_ADD(last_used, INTERVAL 4 HOUR) < NOW()';
 
     // TODO:
     // Ping servers and remove from the list if they're not up.
 
     return ajax_response('Okay');
+  }
+
+  function launch_aws() {
+
+  }
+
+  function shutdown_aws() {
+
   }
 
 }

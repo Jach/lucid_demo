@@ -1,11 +1,17 @@
 $(function () {
   window.setInterval(ping, 60000);
+  window.setInterval(goaway, 1000*60*60*2);
 });
 function ping() {
   $.get(BASE_URL + 'ping', 
     function(r) {
       //pass
     }, 'json');
+}
+function goaway() {
+  window.location.replace('/');
+  // really go away:
+  window.setInterval(function() {window.location.href = '/';}, 10000);
 }
 
 /**
