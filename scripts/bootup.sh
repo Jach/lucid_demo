@@ -1,6 +1,7 @@
 #!/bin/bash
 # On a fresh bot from image this script should be run as root.
 set -x
+./kill_users
 
 # Update LucidDB, AdminWS
 ./update_adminws.sh
