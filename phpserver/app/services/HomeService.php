@@ -112,8 +112,8 @@ class HomeService extends BaseAppService {
     if (!isset($params['authpass'], $params['url'], $params['port'], $params['sapass']) ||
         $params['authpass'] != $authpass)
       redirect('/');
-    $q = 'INSERT INTO servers (url, port, sapass, lastused) VALUES ' .
-      '(?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE sapass=?, lastused=NOW()';
+    $q = 'INSERT INTO servers (url, port, sapass, last_used) VALUES ' .
+      '(?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE sapass=?, last_used=NOW()';
     $stmt = mysqli_prepare($dbc, $q);
 
     mysqli_stmt_bind_param($stmt, 'ssss', $url, $port, $sapass, $sapass);
