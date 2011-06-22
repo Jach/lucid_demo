@@ -1,12 +1,9 @@
 #!/bin/bash
 # helper script to wipe out any active users
-let "N=`ls -l /home/ | grep -v ubuntu | wc -l`"
-let "N=N-1"
 
-for (( i=1; i<=$N; i++ )); do
-  killall -u user$i
-  sleep 10
-  killall -9 -u user$i # make sure everything is dead
-  userdel -r user$i
+for u in `ls /home`; do
+  if [ "$u" != 'ubuntu' ]; then
+    killall -9 -u $u # make sure everything is dead
+    userdel -r $u
+  fi
 done
-killall -u tomcat6
