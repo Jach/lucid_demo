@@ -157,15 +157,19 @@ class HomeService extends BaseAppService {
     // TODO:
     // Ping servers and remove from the list if they're not up.
 
+
+    // clean up old sessions
+    clean_session(60*60*3);
+
     return ajax_response('Okay');
   }
 
   function launch_aws() {
-
+    // avoid launching twice
   }
 
   function shutdown_aws() {
-
+    // avoid shutting down twice
   }
 
 }

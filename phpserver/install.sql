@@ -15,7 +15,6 @@ CREATE TABLE servers (
   last_used TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,
   session_id CHAR(32) DEFAULT NULL,
   INDEX sess_ind (session_id),
-  FOREIGN KEY (session_id) REFERENCES sessions(id)
-    ON DELETE SET NULL,
+  FOREIGN KEY (session_id) REFERENCES sessions(id),
   UNIQUE KEY (url, port)
 ) ENGINE=INNODB;
