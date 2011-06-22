@@ -26,7 +26,7 @@ class HomeService extends BaseAppService {
       $q = 'SELECT id FROM servers WHERE occupied=1 AND session_id=\'' .
         escape_data(session_id()) . '\'';
       $r = mysqli_query($dbc, $q);
-      if (mysqli_num_rows($dbc) == 1)
+      if (mysqli_num_rows($r) == 1)
         redirect('/adminui');
     }
     $list = $this->get_servers_list();
