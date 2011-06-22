@@ -26,6 +26,7 @@ class HomeService extends BaseAppService {
       , 'master' => 'main.tpl'
       , 'content' => 'content/home.tpl'
       , 'servers' => $list
+      , 'this' => $this
     );
     $this->display_page($template_data);
   }
@@ -145,6 +146,13 @@ class HomeService extends BaseAppService {
     $q = 'UPDATE servers SET occupied=0 WHERE id IN (' . implode(',', $ids) . ')';
     $r = mysqli_query($dbc, $q);
     // TODO: tell server to reset its data.
+
+
+    // TODO:
+    // Shut down the instance if no servers have been accessed in a while.
+
+    // TODO:
+    // Ping servers and remove from the list if they're not up.
 
     return ajax_response('Okay');
   }

@@ -6,5 +6,7 @@ let "N=N-1"
 for (( i=1; i<=$N; i++ )); do
   killall -u user$i
   sleep 10
+  killall -9 -u user$i # make sure everything is dead
   userdel -r user$i
 done
+killall -u tomcat6
