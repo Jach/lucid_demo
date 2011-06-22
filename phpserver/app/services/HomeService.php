@@ -131,11 +131,11 @@ class HomeService extends BaseAppService {
     $sapass = $params['sapass'];
 
     $r = mysqli_stmt_execute($stmt);
-    if (mysqli_stmt_affected_rows($stmt) == 1) {
+    //if (mysqli_stmt_affected_rows($stmt) == 1) {
       return ajax_response('Success');
-    } else {
+    /*} else {
       return ajax_response('Failure', TRUE);
-    }
+    }*/
   }
 
   // This should be called periodically.
