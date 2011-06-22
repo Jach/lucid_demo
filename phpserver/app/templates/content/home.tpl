@@ -8,9 +8,7 @@ if (count($servers) == 0) {
 <h4>Please wait while we relaunch, feel free to refresh the page.</h4>
 
 <script type="text/javascript">
-$(function () {
   window.setInterval(window.location.reload, 10000);
-});
 </script>
 
 <?php
