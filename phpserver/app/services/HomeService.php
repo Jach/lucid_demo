@@ -20,12 +20,22 @@ class HomeService extends BaseAppService {
   }
 
   function disp_home_page($params) {
+    // send them back to their adminui if they've still got a session
+    if (isset($_SESSION['server_id'])) {
+      global $dbc;
+      $q = 'SELECT id FROM servers WHERE occupied=1 AND session_id=\'' .
+        escape_data(session_id()) . '\'';
+      $r = mysqli_query($dbc, $q);
+      if (mysqli_num_rows($r) == 1)
+        redirect('/adminui');
+    }
     $list = $this->get_servers_list();
     $template_data = array(
         'title' => 'LucidDB AdminUI Demo'
       , 'master' => 'main.tpl'
       , 'content' => 'content/home.tpl'
       , 'servers' => $list
+      , 'this' => $this
     );
     $this->display_page($template_data);
   }
@@ -111,22 +121,24 @@ class HomeService extends BaseAppService {
     if (!isset($params['authpass'], $params['url'], $params['port'], $params['sapass']) ||
         $params['authpass'] != $authpass)
       redirect('/');
-    $q = 'INSERT INTO servers (url, port, sapass) VALUES (?, ?, ?)';
+    $q = 'INSERT INTO servers (url, port, sapass, last_used) VALUES ' .
+      '(?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE sapass=?, last_used=NOW()';
     $stmt = mysqli_prepare($dbc, $q);
 
-    mysqli_stmt_bind_param($stmt, 'sss', $url, $port, $sapass);
+    mysqli_stmt_bind_param($stmt, 'ssss', $url, $port, $sapass, $sapass);
     $url = 'http://' . $params['url'];
     $port = $params['port'];
     $sapass = $params['sapass'];
 
     $r = mysqli_stmt_execute($stmt);
-    if (mysqli_stmt_affected_rows($stmt) == 1) {
+    //if (mysqli_stmt_affected_rows($stmt) == 1) {
       return ajax_response('Success');
-    } else {
+    /*} else {
       return ajax_response('Failure', TRUE);
-    }
+    }*/
   }
 
+  // This should be called periodically.
   function invalidate_sessions($params) {
     global $dbc;
     // Force any sessions off that have been around for 2 hours
@@ -146,7 +158,27 @@ class HomeService extends BaseAppService {
     $r = mysqli_query($dbc, $q);
     // TODO: tell server to reset its data.
 
+
+    // TODO:
+    // Shut down the instance if no servers have been accessed in 4 hours.
+    $q = 'SELECT id FROM servers WHERE DATE_ADD(last_used, INTERVAL 4 HOUR) < NOW()';
+
+    // TODO:
+    // Ping servers and remove from the list if they're not up.
+
+
+    // clean up old sessions
+    clean_session(60*60*3);
+
     return ajax_response('Okay');
+  }
+
+  function launch_aws() {
+    // avoid launching twice
+  }
+
+  function shutdown_aws() {
+    // avoid shutting down twice
   }
 
 }

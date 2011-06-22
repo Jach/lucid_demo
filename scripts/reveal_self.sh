@@ -12,7 +12,7 @@ chmod +x ./bin/*.sh
 "
 sleep 60 # give time for things to start up
 WS_SERVER=`ec2metadata | grep public-hostname | sed -e "s/^.* //"`
-pw=`cat authpass.txt | sed -e s:\n::`
-sapass=`cat sapass | sed -e s:\n::`
+pw=`cat authpass.txt`
+sapass=`cat sapass`
 sapass=`python -c "import urllib2; print(urllib2.quote('''$sapass''', safe=''))"`
 curl "$DEMO_SERVER/register_server/$pw/$WS_SERVER/$WS_PORT/$sapass"

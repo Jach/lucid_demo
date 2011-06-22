@@ -13,6 +13,15 @@ function randpass() {
 }
 
 let "N=`ls -l /home/ | grep -v ubuntu | wc -l`"
+if [ "$USER_N" != '' ]; then
+  # reset existing user
+  killall -u user$USER_N
+  sleep 10
+  killall -9 -u user$USER_N # make sure everything is dead
+  userdel -r user$USER_N
+  let "N=$USER_N"
+fi
+
 # make a user
 useradd -m -G users -s /bin/bash "user$N"
 pw=`randpass`
@@ -40,10 +49,9 @@ rm -rf trace
 cd install
 ./install.sh
 cd
-# change server to be 8034 + N-users
+# change server to be 8034 + N-users and change sa password
 let "LUCID=8034+$N"
 echo "alter system set \"serverHttpPort\" = $LUCID;" | ./luciddb/bin/sqllineEngine
-# change sa password
 echo "CREATE or REPLACE USER \"sa\" IDENTIFIED BY '"'$sapass'"';" | ./luciddb/bin/sqllineEngine
 
 # change WS properties file
