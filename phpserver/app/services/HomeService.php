@@ -168,7 +168,7 @@ class HomeService extends BaseAppService {
     $servers = $this->get_servers_list();
     $ids = array();
     foreach ($servers as $server) {
-      $ch = curl_init($server['url'] . ':' . $server['port']);
+      $ch = curl_init($server['url'] . ':' . $server['port'] . '/crossdomain.xml');
       curl_setopt($ch, CURLOPT_NOBODY, true);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
       curl_exec($ch);
