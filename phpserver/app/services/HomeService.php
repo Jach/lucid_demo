@@ -42,7 +42,7 @@ class HomeService extends BaseAppService {
 
   function get_servers_list() {
     global $dbc;
-    $q = 'SELECT id, occupied FROM servers';
+    $q = 'SELECT id, occupied, url, port FROM servers';
     $r = mysqli_query($dbc, $q);
     $servers = array();
     while ($row = mysqli_fetch_assoc($r)) {
@@ -165,7 +165,28 @@ class HomeService extends BaseAppService {
 
     // TODO:
     // Ping servers and remove from the list if they're not up.
-
+    $servers = $this->get_servers_list();
+    $ids = array();
+    foreach ($servers as $server) {
+      $ch = curl_init($server['url'] . ':' . $server['port']);
+      curl_setopt($ch, CURLOPT_NOBODY, true);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_exec($ch);
+      $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+      curl_close($ch);
+      if ($code != 200) {
+        $ids[] = $server['id'];
+      }
+    }
+    if (count($ids) > 0) {
+      $q = '';
+      if (count($ids) == count($servers)) {
+        $q = 'TRUNCATE servers';
+      } else {
+        $q = 'DELETE FROM servers WHERE id IN (' . implode(',', $ids) . ')';
+      }
+      $r = mysqli_query($dbc, $q);
+    }
 
     // clean up old sessions
     clean_session(60*60*3);
